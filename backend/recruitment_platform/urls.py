@@ -16,23 +16,28 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.static import serve
+from django.conf import settings
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
-
 from apps.core.views import frontend
 
-vue_urls = [
+frontend_urls = [
     path("", frontend),
-    path("another-path/", frontend),
 ]
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include(vue_urls)),
+    # path("admin/", admin.site.urls),
+    re_path(
+        r"^assets/(?P<path>.*)$",
+        serve,
+        {"document_root": settings.STATIC_ROOT},
+    ),
+    path("", include(frontend_urls)),
     path(
         "api/auth/token",
         TokenObtainPairView.as_view(),
@@ -43,5 +48,5 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name="token_refresh",
     ),
-    path("api/user/", include("apps.user.urls")),
+    path("api/user", include("apps.user.urls")),
 ]

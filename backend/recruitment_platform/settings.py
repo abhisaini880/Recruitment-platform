@@ -21,6 +21,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load env variables
 load_dotenv()
 
+DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
+
+
+STATIC_URL = "/assets/"
+
+if DJANGO_ENV == "prod":
+    STATIC_ROOT = os.path.join(BASE_DIR, "../frontend/build/")
+    DEBUG = False
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "../frontend/build/")]
+    DEBUG = True
+    ALLOWED_HOSTS = []
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -28,11 +44,6 @@ load_dotenv()
 SECRET_KEY = (
     "django-insecure-8=573r8bo2ywxfsikz485^b@=klgdl^@6t_=p*vhpy&g+$2@vj"
 )
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -46,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
     "apps.core",
     "apps.user",
 ]
@@ -53,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -60,12 +73,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:8000",
+]
+
 ROOT_URLCONF = "recruitment_platform.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "../frontend/build/templates")],
+        "DIRS": [os.path.join(BASE_DIR, "../frontend/build/")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,17 +145,12 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = "/static/"
-STATIC_ROOT = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "../frontend/build/static")]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+APPEND_SLASH = False
 
 # AUTH Model
 AUTH_USER_MODEL = "core.User"
