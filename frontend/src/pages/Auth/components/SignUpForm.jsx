@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { signUp } from '../../services/api';
+import React, { useState } from "react"
+import { signUp } from "../../../services/auth/signUp"
 
 const SignUpForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await signUp({ name, email, password });
-    console.log(response);
-  };
+    e.preventDefault()
+    const response = await signUp({ name, email, password })
+    console.log(response)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,7 +43,7 @@ const SignUpForm = () => {
       </div>
       <button type="submit">Sign Up</button>
     </form>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

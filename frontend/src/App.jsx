@@ -1,12 +1,11 @@
 import React from "react"
-import Login from "./components/Login/Login"
-import SignUp from "./components/SignUp/SignUp"
-import AuthForm from "./components/AuthForm/AuthForm"
+import { RouterProvider } from "react-router-dom"
+import router from "./routes/router"
 
 const App = () => {
   return (
     <div>
-      <AuthForm/>
+      <RouterProvider router={router} />
     </div>
   )
 }

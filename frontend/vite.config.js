@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react"
 
 export default defineConfig({
   plugins: [react()],
-  base: "/assets/", // This sets the base public path
+  base: "/", // This sets the base public path
   build: {
     outDir: "./build/", // This sets the output directory
     rollupOptions: {
