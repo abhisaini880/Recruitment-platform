@@ -23,7 +23,7 @@ const SignInForm = () => {
     const response = await signIn({ email, password })
     console.log(response)
     setAuthToken(response.access, response.refresh)
-    navigate(routesConfig.app.path)
+    navigate(routesConfig.app)
   }
 
   return (

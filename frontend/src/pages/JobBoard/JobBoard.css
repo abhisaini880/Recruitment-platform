@@ -1,0 +1,110 @@
+
+.job-card {
+  display: flex;
+  height: 100px;
+  padding: 10px;
+  border: solid 1px #ddd;
+  border-radius: 10px;
+}
+
+.job-card__left-section {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  align-items: left;
+  padding: 0px 20px;
+  width: 50%;
+  justify-content: center;
+}
+
+.job-card__profile p {
+  border: solid 1px;
+  border-color: gray;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: lightgrey;
+}
+
+.job-card__right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+  height: 100px;
+  margin-left: 250px;
+  margin-right: 20px;
+  gap: 40px;
+}
+
+.job-card__right-section p {
+  color: grey;
+}
+
+.job-card__right-section button {
+  border-color: dodgerblue;
+  color: dodgerblue;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 25px;
+  width: 90px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.job-card__right-section button:hover {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.job-card__profile {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin: 0px 0px;
+  height: 30px;
+}
+.job-card__requirements {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 30px;
+  margin: 0px 0px;
+}
+
+.job-card__requirements p {
+  border: solid 1px;
+  border-color: gray;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: lightgrey;
+}
+
+.search-bar {
+  display: flex;
+  gap: 50px;
+  margin: 40px 0px;
+  justify-content: center;
+}
+
+.search-bar__select {
+  width: 100vw;
+  padding: 5px 10px;
+  font-size: large;
+  border-radius: 8px;
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.search-bar__button {
+  width: 100vw;
+  padding: 5px 10px;
+  font-size: x-large;
+  border-radius: 8px;
+  background-color: forestgreen;
+  color: white;
+  cursor: pointer;
+}
+
+.search-bar__button:hover {
+  background-color: green;
+}

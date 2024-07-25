@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import SignInForm from "./components/SignInForm"
-import SignUpForm from "./components/SignUpForm"
+import SignInForm from "./Components/SignInForm"
+import SignUpForm from "./Components/SignUpForm"
 import "./AuthForm.css"
 
 const AuthForm = () => {

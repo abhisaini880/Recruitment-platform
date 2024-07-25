@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
 import { styled, alpha } from "@mui/material/styles"
-import AppBar from "@mui/material/AppBar"
+import MuiAppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import IconButton from "@mui/material/IconButton"
@@ -20,6 +20,7 @@ import MoreIcon from "@mui/icons-material/MoreVert"
 // internal imports
 import { clearAuthToken } from "../../utils/authTokens"
 import routesConfig from "../../routes/routesConfig"
+import SideDrawer from "../SideDrawer/SideDrawer"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,6 +62,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }))
 
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+}))
+
 export default function Header() {
   const navigate = useNavigate()
 
@@ -69,6 +80,12 @@ export default function Header() {
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+
+  const [open, setOpen] = React.useState(true)
+
+  const handleDrawer = () => {
+    setOpen(!open)
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -85,7 +102,7 @@ export default function Header() {
 
   const handleLogout = () => {
     clearAuthToken()
-    navigate(routesConfig.home.auth.path)
+    navigate(routesConfig.auth)
   }
 
   const handleMobileMenuOpen = (event) => {
@@ -168,14 +185,16 @@ export default function Header() {
   )
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <>
+      <SideDrawer open={open} />
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={handleDrawer}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -186,7 +205,7 @@ export default function Header() {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            Recruitment
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -245,6 +264,6 @@ export default function Header() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </>
   )
 }

@@ -1,21 +1,16 @@
 const routesConfig = {
-  home: {
-    path: "/",
-    auth: {
-      path: "auth",
-      fullPath: "/auth",
-    },
-  },
-  app: {
-    path: "/app",
-    dashboard: {
-      path: "dashboard",
-      fullPath: "/app/dashboard",
-    },
-  },
-  pageNotFound: {
-    path: "*",
-  },
+  // Public Routes
+  home: "/",
+  auth: "/auth",
+
+  // Protected Routes
+  app: "/app",
+  dashboard: "/app/dashboard",
+  settings: "/app/settings",
+  jobboard: "/app/jobboard",
+
+  // Not Found
+  pageNotFound: "*",
 }
 
 export default routesConfig

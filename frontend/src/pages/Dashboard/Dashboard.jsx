@@ -1,7 +1,17 @@
 import React from "react"
+import "./Dashboard.css"
 
-const dashboard = () => {
-  return <div>dashboard</div>
+const Dashboard = () => {
+  return (
+    <div>
+      <h2> Test </h2>
+      <h2> Dashboard </h2>
+      <h2> Dashboard </h2>
+
+      <h2> Dashboard </h2>
+      <h2> Dashboard </h2>
+    </div>
+  )
 }
 
-export default dashboard
+export default Dashboard
